@@ -29,5 +29,5 @@ jobs:
 
       - name: Test
         run: |
-          make world/tz_world.shp
-          make z_gen_tables.go
+          make download
+          make gen
