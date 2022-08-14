@@ -4,4 +4,4 @@ z_gen_tables.go: gen_test.go latlong.go world/tz_world.shp
 
 world/tz_world.shp:
 	wget http://efele.net/maps/tz/world/tz_world.zip
-	unzip -f tz_world.zip
+	unzip tz_world.zip
