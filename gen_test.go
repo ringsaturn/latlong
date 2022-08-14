@@ -247,7 +247,7 @@ func TestGenerate(t *testing.T) {
 	// The auto-generated source file (z_gen_tables.go)
 	var gen bytes.Buffer
 	gen.WriteString("// Auto-generated file. See README or Makefile.\n\npackage latlong\n\n")
-	gen.WriteString("func init() {\n")
+	gen.WriteString("func inittables() {\n")
 
 	fmt.Fprintf(&gen, "degPixels = %d\n", int(*flagScale))
 

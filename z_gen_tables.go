@@ -2,7 +2,7 @@
 
 package latlong
 
-func init() {
+func inittables() {
 	degPixels = 32
 	zoomLevels = [6]*zoomLevel{
 		5: {
