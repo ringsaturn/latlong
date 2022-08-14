@@ -35,9 +35,7 @@ func TestLookupLatLong(t *testing.T) {
 var testAllPixels func(t *testing.T)
 
 func TestAllPixels(t *testing.T) {
-	if testAllPixels == nil {
-		t.Skip("exhaustive pixel test disabled without --tags=latlong_gen (requires extra deps)")
-	}
+	// See gen_test.go for detail
 	testAllPixels(t)
 }
 

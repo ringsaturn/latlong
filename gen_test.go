@@ -242,10 +242,6 @@ func testAllPixels_gen(t *testing.T) {
 }
 
 func TestGenerate(t *testing.T) {
-	if !*flagGenerate {
-		t.Skip("skipping generationg without --generate flag")
-	}
-
 	im, zoneOfColor := worldImage(t)
 
 	// The auto-generated source file (z_gen_tables.go)
@@ -301,7 +297,7 @@ func TestGenerate(t *testing.T) {
 
 	gen.WriteString("zoomLevels = [6]*zoomLevel{\n")
 	for _, sizeShift := range []uint8{5, 4, 3, 2, 1, 0} {
-		fmt.Fprintf(&gen, "\t%d: &zoomLevel{\n", sizeShift)
+		fmt.Fprintf(&gen, "\t%d: {\n", sizeShift)
 		var keyIdxBuf bytes.Buffer // repeated binary [tilekey][uint16_idx]
 
 		pass := newSizePass(im, imo, sizeShift)
