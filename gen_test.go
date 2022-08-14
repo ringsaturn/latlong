@@ -1,3 +1,4 @@
+//go:build latlong_gen
 // +build latlong_gen
 
 /*
