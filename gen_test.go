@@ -42,13 +42,11 @@ import (
 )
 
 var (
-	flagGenerate   = flag.Bool("generate", false, "Do generation")
-	flagWriteImage = flag.Bool("write_image", false, "Write out a debug image")
-	flagScale      = flag.Float64("scale", 32, "Scaling factor. This many pixels wide & tall per degree (e.g. scale 1 is 360 x 180). Increasingly this code assumes a scale of 32, though.")
+	flagScale = flag.Float64("scale", 32, "Scaling factor. This many pixels wide & tall per degree (e.g. scale 1 is 360 x 180). Increasingly this code assumes a scale of 32, though.")
 )
 
 func saveToPNGFile(filePath string, m image.Image) {
-	log.Printf("Encoding image %s ...", filePath)
+	log.Printf("Encoding image %s ...\n", filePath)
 	f, err := os.Create(filePath)
 	if err != nil {
 		log.Println(err)
@@ -290,9 +288,8 @@ func TestGenerate(t *testing.T) {
 	}
 
 	var imo *image.RGBA
-	if *flagWriteImage {
-		imo = cloneImage(im)
-	}
+	imo = cloneImage(im)
+
 	dupColorTiles := 0
 
 	gen.WriteString("zoomLevels = [6]*zoomLevel{\n")
@@ -318,7 +315,7 @@ func TestGenerate(t *testing.T) {
 			if nColor == 1 {
 				zoneName := zoneOfColor[tile.color()]
 				if idx, isNew := zoneIndex.Add(zoneName); isNew {
-					panic("zone should've been registered: " + zoneName)
+					panic(fmt.Sprintf("zone should've been registered: `%v`\n", zoneName))
 				} else {
 					binary.Write(&keyIdxBuf, binary.BigEndian, tile.key())
 					binary.Write(&keyIdxBuf, binary.BigEndian, idx)
