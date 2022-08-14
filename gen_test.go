@@ -1,6 +1,3 @@
-//go:build latlong_gen
-// +build latlong_gen
-
 /*
 Copyright 2014 Google Inc.
 
