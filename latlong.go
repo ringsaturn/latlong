@@ -32,6 +32,7 @@ import (
 	"io/ioutil"
 	"sort"
 	"strings"
+	"sync"
 )
 
 // Populated by z_gen_tables.go:
@@ -41,11 +42,6 @@ var (
 	uniqueLeavesPacked string
 	leaf               []zoneLooker
 )
-
-func init() {
-	inittables()
-	unpackTables()
-}
 
 // LookupZoneName returns the timezone name at the given latitude and
 // longitude. The returned name is either the empty string (if not
@@ -71,6 +67,7 @@ func lookupPixel(x, y int) string {
 	if degPixels == -1 {
 		return "tables not generated yet"
 	}
+	unpackOnce.Do(unpackTables)
 
 	for level := 5; level >= 0; level-- {
 		shift := 3 + uint8(level)
@@ -84,6 +81,8 @@ func lookupPixel(x, y int) string {
 	}
 	return ""
 }
+
+var unpackOnce sync.Once
 
 func unpackTables() {
 	for _, zl := range zoomLevels {
